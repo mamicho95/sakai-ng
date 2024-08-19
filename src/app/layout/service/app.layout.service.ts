@@ -3,8 +3,8 @@ import { Subject } from 'rxjs';
 
 export interface AppConfig {
     inputStyle: string;
-    colorScheme: string;
-    theme: string;
+    // colorScheme: string;
+    // theme: string;
     ripple: boolean;
     menuMode: string;
     scale: number;
@@ -27,8 +27,8 @@ export class LayoutService {
         ripple: false,
         inputStyle: 'outlined',
         menuMode: 'static',
-        colorScheme: 'light',
-        theme: 'lara-light-indigo',
+        // colorScheme: 'dark',
+        // theme: 'bootstrap4-dark-purple',
         scale: 14,
     };
 
@@ -52,22 +52,22 @@ export class LayoutService {
     overlayOpen$ = this.overlayOpen.asObservable();
 
     constructor() {
-        effect(() => {
-            const config = this.config();
-            if (this.updateStyle(config)) {
-                this.changeTheme();
-            }
-            this.changeScale(config.scale);
-            this.onConfigUpdate();
-        });
+        // effect(() => {
+        //     const config = this.config();
+        //     if (this.updateStyle(config)) {
+        //         this.changeTheme();
+        //     }
+        //     this.changeScale(config.scale);
+        //     this.onConfigUpdate();
+        // });
     }
 
-    updateStyle(config: AppConfig) {
-        return (
-            config.theme !== this._config.theme ||
-            config.colorScheme !== this._config.colorScheme
-        );
-    }
+    // updateStyle(config: AppConfig) {
+    //     return (
+    //         config.theme !== this._config.theme ||
+    //         config.colorScheme !== this._config.colorScheme
+    //     );
+    // }
 
     onMenuToggle() {
         if (this.isOverlay()) {
@@ -118,40 +118,40 @@ export class LayoutService {
         this.configUpdate.next(this.config());
     }
 
-    changeTheme() {
-        const config = this.config();
-        const themeLink = <HTMLLinkElement>document.getElementById('theme-css');
-        const themeLinkHref = themeLink.getAttribute('href')!;
-        const newHref = themeLinkHref
-            .split('/')
-            .map((el) =>
-                el == this._config.theme
-                    ? (el = config.theme)
-                    : el == `theme-${this._config.colorScheme}`
-                    ? (el = `theme-${config.colorScheme}`)
-                    : el
-            )
-            .join('/');
+    // changeTheme() {
+    //     const config = this.config();
+    //     const themeLink = <HTMLLinkElement>document.getElementById('theme-css');
+    //     const themeLinkHref = themeLink.getAttribute('href')!;
+    //     const newHref = themeLinkHref
+    //         .split('/')
+    //         .map((el) =>
+    //             el == this._config.theme
+    //                 ? (el = config.theme)
+    //                 : el == `theme-${this._config.colorScheme}`
+    //                 ? (el = `theme-${config.colorScheme}`)
+    //                 : el
+    //         )
+    //         .join('/');
 
-        this.replaceThemeLink(newHref);
-    }
-    replaceThemeLink(href: string) {
-        const id = 'theme-css';
-        let themeLink = <HTMLLinkElement>document.getElementById(id);
-        const cloneLinkElement = <HTMLLinkElement>themeLink.cloneNode(true);
+    //     this.replaceThemeLink(newHref);
+    // }
+    // replaceThemeLink(href: string) {
+    //     const id = 'theme-css';
+    //     let themeLink = <HTMLLinkElement>document.getElementById(id);
+    //     const cloneLinkElement = <HTMLLinkElement>themeLink.cloneNode(true);
 
-        cloneLinkElement.setAttribute('href', href);
-        cloneLinkElement.setAttribute('id', id + '-clone');
+    //     cloneLinkElement.setAttribute('href', href);
+    //     cloneLinkElement.setAttribute('id', id + '-clone');
 
-        themeLink.parentNode!.insertBefore(
-            cloneLinkElement,
-            themeLink.nextSibling
-        );
-        cloneLinkElement.addEventListener('load', () => {
-            themeLink.remove();
-            cloneLinkElement.setAttribute('id', id);
-        });
-    }
+    //     themeLink.parentNode!.insertBefore(
+    //         cloneLinkElement,
+    //         themeLink.nextSibling
+    //     );
+    //     cloneLinkElement.addEventListener('load', () => {
+    //         themeLink.remove();
+    //         cloneLinkElement.setAttribute('id', id);
+    //     });
+    // }
 
     changeScale(value: number) {
         document.documentElement.style.fontSize = `${value}px`;

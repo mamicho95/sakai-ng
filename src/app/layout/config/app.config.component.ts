@@ -60,15 +60,15 @@ export class AppConfigComponent {
         }));
     }
 
-    set theme(val: string) {
-        this.layoutService.config.update((config) => ({
-            ...config,
-            theme: val,
-        }));
-    }
-    get theme(): string {
-        return this.layoutService.config().theme;
-    }
+    // set theme(val: string) {
+    //     this.layoutService.config.update((config) => ({
+    //         ...config,
+    //         theme: val,
+    //     }));
+    // }
+    // get theme(): string {
+    //     return this.layoutService.config().theme;
+    // }
 
     set colorScheme(val: string) {
         this.layoutService.config.update((config) => ({
@@ -76,18 +76,18 @@ export class AppConfigComponent {
             colorScheme: val,
         }));
     }
-    get colorScheme(): string {
-        return this.layoutService.config().colorScheme;
-    }
+    // get colorScheme(): string {
+    //     return this.layoutService.config().colorScheme;
+    // }
 
-    onConfigButtonClick() {
-        this.layoutService.showConfigSidebar();
-    }
+    // onConfigButtonClick() {
+    //     this.layoutService.showConfigSidebar();
+    // }
 
-    changeTheme(theme: string, colorScheme: string) {
-        this.theme = theme;
-        this.colorScheme = colorScheme;
-    }
+    // changeTheme(theme: string, colorScheme: string) {
+    //     this.theme = theme;
+    //     this.colorScheme = colorScheme;
+    // }
 
     decrementScale() {
         this.scale--;
